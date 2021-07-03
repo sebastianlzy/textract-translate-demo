@@ -4,9 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "activate:venv": "source textract-translate-env/bin/activate",
+    "textract:detect": "amazon-textract --input-document \"./textract/employment_application.png\"",
+    "textract:analyze": "amazon-textract --input-document \"./textract/employment_application.png\" --features FORMS TABLES",
+    "textract:pretty-print-lines": "cat ./textract/detect.json | amazon-textract --stdin --pretty-print LINES",
+    "textract:pretty-print-forms": "cat ./textract/analyze.json | amazon-textract --stdin --pretty-print FORMS",
+    "textract:pretty-print-tables": "cat ./textract/analyze.json | amazon-textract --stdin --pretty-print TABLES",
+    "textract:pretty-print-forms-tables": "cat ./textract/analyze.json | amazon-textract --stdin --pretty-print FORMS TABLES",
+    "pip:textract-helper": "python -m pip install amazon-textract-helper",
+    "run": "node index.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-translate": "^3.19.0",
+    "dotenv": "^10.0.0",
+    "shelljs": "^0.8.4",
+    "winston": "^3.3.3"
+  }
 }
